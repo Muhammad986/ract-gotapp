@@ -32,8 +32,8 @@ export default class RandomChar extends Component {
     }
 
     updateChar() {
-        // const id = Math.floor(Math.random()*140 + 25); //25-140
-        const id = 1300000;
+        const id = Math.floor(Math.random()*140 + 25); //25-140
+        // const id = 1300000; //С выводом ошибки
         this.gotService.getCharacter(id) /* Тут нам возвращает Promice */
             .then(this.onCharLoaded)
             .catch(this.onError);

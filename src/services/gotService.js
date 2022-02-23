@@ -21,27 +21,37 @@ export default class GotService {
         return this._transformCharacter(character);
     }
 
-    getAllHouses() {
-        return this.getResource('/houses');
+    async getAllHouses() {
+        const res = await this.getResource('/houses');
+        return res.map(this._tranformHouse);
     }
-    getHouse(id) {
-        return this.getResource(`/houses/${id}`);
-    }
-
-    getAllBooks() {
-        return this.getResource('/books');
-    }
-    getBook(id) {
-        return this.getResource(`/books/${id}`);
+    async getHouse(id) {
+        const house = await this.getResource(`/houses/${id}`);
+        return this._tranformHouse(house);
     }
 
+    async getAllBooks() {
+        const res = await this.getResource('/books');
+        return res.map(this._tranformBook);
+    }
+    async getBook(id) {
+        const book = await this.getResource(`/books/${id}`);
+        return this._tranformBook(book);
+    }
+    isSet(data) {
+        if(data) {
+            return data;
+        } else {
+            return 'no data :('
+        }
+    }
     _transformCharacter(char) {
         return {
-            name: char.name,
-            gender: char.gender,
-            born: char.born,
-            deid: char.deid,
-            culture: char.culture
+            name: this.isSet(char.name),
+            gender: this.isSet(char.gender),
+            born: this.isSet(char.born),
+            deid: this.isSet(char.deid),
+            culture: this.isSet(char.culture)
         }
     }
 
