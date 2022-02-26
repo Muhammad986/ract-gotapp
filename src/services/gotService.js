@@ -38,20 +38,21 @@ export default class GotService {
         const book = await this.getResource(`/books/${id}`);
         return this._tranformBook(book);
     }
-    isSet(data) {
-        if(data) {
-            return data;
-        } else {
-            return 'no data :('
-        }
-    }
+
     _transformCharacter(char) {
+        function isSet(data) {
+            if(data) {
+                return data;
+            } else {
+                return 'no data :('
+            }
+        }
         return {
-            name: this.isSet(char.name),
-            gender: this.isSet(char.gender),
-            born: this.isSet(char.born),
-            deid: this.isSet(char.deid),
-            culture: this.isSet(char.culture)
+            name: isSet(char.name),
+            gender: isSet(char.gender),
+            born: isSet(char.born),
+            deid: isSet(char.deid),
+            culture: isSet(char.culture)
         }
     }
 

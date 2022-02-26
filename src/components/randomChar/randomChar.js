@@ -5,17 +5,21 @@ import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
 export default class RandomChar extends Component {
 
-    constructor() {
-        super();
-        this.updateChar(); /* При создании класса, будет вызван updateChar */
-    }
-
     gotService = new gotService(); 
     state = {
         char: {},
         loading: true,
         error: false
     };
+
+    componentDidMount() {
+        this.updateChar(); /* При создании класса, будет вызван updateChar */
+        this.timerId = setInterval(this.updateChar, 1500);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
+    }
 
     onCharLoaded = (char) => {
         this.setState({
@@ -31,7 +35,7 @@ export default class RandomChar extends Component {
         });
     }
 
-    updateChar() {
+    updateChar = () => {
         const id = Math.floor(Math.random()*140 + 25); //25-140
         // const id = 1300000; //С выводом ошибки
         this.gotService.getCharacter(id) /* Тут нам возвращает Promice */
@@ -40,6 +44,7 @@ export default class RandomChar extends Component {
     }
 
     render() {
+        console.log('render');
         const {char, loading, error } = this.state;
 
         const errorMessage = error ? <ErrorMessage/> : null;
