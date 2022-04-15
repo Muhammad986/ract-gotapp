@@ -62,7 +62,7 @@ export default class RandomChar extends Component {
 }
 
 const View = ({char}) => {
-    const { name, gender, born, deid, culture } = char;
+    const { name, gender, born, died, culture } = char;
 
     return (
         <>
@@ -78,7 +78,7 @@ const View = ({char}) => {
                 </li>
                 <li className="list-group-item d-flex justify-content-between">
                     <span className="term">Died </span>
-                    <span>{deid}</span>
+                    <span>{died}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between">
                     <span className="term">Culture </span>
