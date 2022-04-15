@@ -52,5 +52,6 @@ export default class CharacterPage extends Component{
         return (
             <RowBlock left={itemList} right={charDetails}/>
         );
-    }
+    } 
+    
 }
